@@ -14,11 +14,8 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons CDN -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Lottie Player CDN (Untuk Animasi Interaktif di Tengah) -->
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <!-- Font Awesome 6 CDN (Ikon Lengkap & Stabil) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
         tailwind.config = {
@@ -44,10 +41,21 @@
             }
         }
     </script>
+
+    <!-- Custom Style Animasi Mengapung (Floating) -->
+    <style>
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
 
-    <!-- Background Elements -->
+    <!-- Background Glow Elements -->
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-brand-600/20 via-emerald-900/10 to-transparent blur-3xl opacity-60"></div>
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-900/10 blur-3xl rounded-full"></div>
@@ -69,30 +77,39 @@
         </div>
     </header>
 
-    <!-- Hero Section (Dengan Animasi di Tengah) -->
-    <section class="relative pt-12 pb-16 md:pt-20 md:pb-24 px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Hero Section (Ikon Font Awesome Besar & Animatif di Tengah) -->
+    <section class="relative pt-12 pb-16 md:pt-16 md:pb-24 px-4 sm:px-6 lg:px-8 text-center">
         <div class="max-w-4xl mx-auto">
             
-            <!-- Tag Badge -->
-            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-medium mb-6">
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <!-- Badge Program Studi -->
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-medium mb-8">
+                <i class="fa-solid fa-graduation-cap text-brand-400"></i>
                 <span>Prodi Bimbingan dan Konseling Islam</span>
             </div>
 
-            <!-- Animasi Lottie Modul Digital (Di Tengah Besar) -->
-            <div class="w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-4 flex items-center justify-center relative">
-                <div class="absolute inset-0 bg-brand-500/10 rounded-full blur-2xl -z-10 animate-pulse"></div>
-                <!-- Menggunakan Lottie Player untuk Animasi E-Book / Edukasi Interaktif -->
-                <dotlottie-player 
-                    src="https://lottie.host/801a6104-a1fb-4299-9686-35b91b5c4786/aBvF11qFm8.lottie" 
-                    background="transparent" 
-                    speed="1" 
-                    style="width: 100%; height: 100%;" 
-                    loop 
-                    autoplay>
-                </dotlottie-player>
+            <!-- IKON MODUL DIGITAL BESAR DAN ANIMATIF (Font Awesome) -->
+            <div class="relative w-44 h-44 sm:w-56 sm:h-56 mx-auto mb-8 flex items-center justify-center">
+                <!-- Outer Glow Ring (Pulse) -->
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-brand-500/30 to-emerald-500/10 blur-2xl animate-pulse"></div>
+                
+                <!-- Container Ikon Utama (Mengapung) -->
+                <div class="relative w-full h-full rounded-3xl bg-slate-900/80 border border-brand-500/30 shadow-2xl shadow-brand-500/20 flex items-center justify-center backdrop-blur-xl animate-float">
+                    
+                    <!-- Ikon Buku Digital Utama -->
+                    <i class="fa-solid fa-book-bookmark text-6xl sm:text-8xl bg-gradient-to-tr from-brand-400 via-emerald-400 to-teal-200 bg-clip-text text-transparent"></i>
+                    
+                    <!-- Ikon Aksesoris Animatif (Sinyal/Sparkle melayang) -->
+                    <div class="absolute -top-2 -right-2 w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 animate-bounce">
+                        <i class="fa-solid fa-laptop-code text-lg"></i>
+                    </div>
+                    
+                    <div class="absolute -bottom-2 -left-2 w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 animate-pulse">
+                        <i class="fa-solid fa-bolt text-lg"></i>
+                    </div>
+                </div>
             </div>
 
+            <!-- Judul Utama -->
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 leading-tight mb-6">
                 Platform Pembelajaran <br class="hidden sm:inline">
                 <span class="bg-gradient-to-r from-brand-400 via-emerald-400 to-teal-200 bg-clip-text text-transparent">
@@ -107,7 +124,7 @@
             <div class="flex flex-wrap items-center justify-center gap-4">
                 <a href="#matakuliah" class="px-6 py-3.5 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-500 hover:to-emerald-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-500/25 transition duration-300 flex items-center space-x-2">
                     <span>Mulai Belajar</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
                 </a>
                 <a href="#fitur" class="px-6 py-3.5 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-semibold rounded-xl transition duration-300">
                     Pelajari Fitur
@@ -127,8 +144,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Fitur 1 -->
                 <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/40 transition duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4">
-                        <i data-lucide="smartphone" class="w-6 h-6"></i>
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4 text-xl">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
                     </div>
                     <h3 class="text-lg font-bold text-slate-100 mb-2">Responsive & Mobile Friendly</h3>
                     <p class="text-slate-400 text-sm leading-relaxed">
@@ -138,8 +155,8 @@
 
                 <!-- Fitur 2 -->
                 <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/40 transition duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4">
-                        <i data-lucide="book-open-check" class="w-6 h-6"></i>
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4 text-xl">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
                     <h3 class="text-lg font-bold text-slate-100 mb-2">Materi Terstruktur</h3>
                     <p class="text-slate-400 text-sm leading-relaxed">
@@ -149,8 +166,8 @@
 
                 <!-- Fitur 3 -->
                 <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/40 transition duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4">
-                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4 text-xl">
+                        <i class="fa-solid fa-gauge-high"></i>
                     </div>
                     <h3 class="text-lg font-bold text-slate-100 mb-2">Akses Cepat & Ringan</h3>
                     <p class="text-slate-400 text-sm leading-relaxed">
@@ -161,7 +178,7 @@
         </div>
     </section>
 
-    <!-- Section Mata Kuliah (Menggunakan Konsep Interactive Learning Portal Card) -->
+    <!-- Section Mata Kuliah -->
     <section id="matakuliah" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
@@ -178,14 +195,14 @@
 
             <!-- Card 1: Sosiologi -->
             <div class="group relative bg-slate-900/90 border border-slate-800 hover:border-brand-500/50 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/10 flex flex-col justify-between overflow-hidden">
-                <!-- Hiasan Background Glow -->
+                <!-- Background Glow -->
                 <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl group-hover:bg-brand-500/20 transition duration-500"></div>
 
                 <div>
                     <!-- Badge & Icon -->
                     <div class="flex items-center justify-between mb-6">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/20 to-emerald-700/20 border border-brand-500/30 flex items-center justify-center text-brand-400">
-                            <i data-lucide="users" class="w-7 h-7"></i>
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/20 to-emerald-700/20 border border-brand-500/30 flex items-center justify-center text-brand-400 text-2xl">
+                            <i class="fa-solid fa-users-viewfinder"></i>
                         </div>
                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">
                             Mata Kuliah
@@ -206,24 +223,24 @@
                         <span class="block text-slate-500">Dosen Pengampu</span>
                         <span class="font-medium text-slate-300">Diah Meitikasari, M.Si.</span>
                     </div>
-                    <!-- Link ke halaman sosiologi Anda -->
-                    <a href="bahan-ajar/sosiologi/dashboard-sos.html" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold transition duration-300 shadow-md">
+                    <!-- Link ke halaman sosiologi -->
+                    <a href="/sosiologi/sosiologi.html" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold transition duration-300 shadow-md">
                         <span>Buka Modul</span>
-                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Card 2: Konseling Multikultural -->
             <div class="group relative bg-slate-900/90 border border-slate-800 hover:border-brand-500/50 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/10 flex flex-col justify-between overflow-hidden">
-                <!-- Hiasan Background Glow -->
+                <!-- Background Glow -->
                 <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition duration-500"></div>
 
                 <div>
                     <!-- Badge & Icon -->
                     <div class="flex items-center justify-between mb-6">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-700/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                            <i data-lucide="globe-2" class="w-7 h-7"></i>
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-700/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                            <i class="fa-solid fa-earth-asia"></i>
                         </div>
                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">
                             Mata Kuliah
@@ -244,10 +261,9 @@
                         <span class="block text-slate-500">Prodi</span>
                         <span class="font-medium text-slate-300">Bimbingan & Konseling Islam</span>
                     </div>
-                    <!-- Link placeholder ke modul konseling multikultural -->
-                    <a href="#" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition duration-300">
+                    <a href="#" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 text-sm font-semibold transition duration-300 cursor-not-allowed">
                         <span>Segera Hadir</span>
-                        <i data-lucide="lock" class="w-4 h-4"></i>
+                        <i class="fa-solid fa-lock text-xs"></i>
                     </a>
                 </div>
             </div>
@@ -260,13 +276,9 @@
         <div class="max-w-7xl mx-auto px-4">
             <p class="font-medium text-slate-300">Prodi Bimbingan dan Konseling Islam</p>
             <p class="mt-1">Fakultas Tarbiyah - IAIN Syaikh Abdurrahman Siddik Bangka Belitung</p>
-            <p class="mt-4 text-slate-400">&copy; 2026 Modul Digital Interaktif. All Rights Reserved.</p>
+            <p class="mt-4 text-slate-500">&copy; 2026 Modul Digital Interaktif. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Lucide Icon Initializer -->
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>

@@ -1,1100 +1,272 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sosiologi | Semester Genap 2025/2026 - IAIN SAS Babel</title>
+    <title>Modul Digital Interaktif - IAIN SAS Babel</title>
+    <link rel="icon" type="image/png" href="img/logo-iain.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Lottie Player CDN (Untuk Animasi Interaktif di Tengah) -->
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         brand: {
                             50: '#f0fdf4',
                             100: '#dcfce7',
+                            400: '#4ade80',
                             500: '#22c55e',
                             600: '#16a34a',
                             700: '#15803d',
                             800: '#166534',
                             900: '#14532d',
-                            950: '#052e16',
-                        },
-                        gold: {
-                            400: '#facc15',
-                            500: '#eab308',
-                            600: '#ca8a04'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        cinematic: ['Cinzel', 'serif']
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif'],
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(34, 197, 94, 0.4);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(34, 197, 94, 0.7);
-        }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
 
-    <div id="app" class="flex h-screen overflow-hidden">
-        
-        <!-- Mobile Sidebar Overlay -->
-        <div id="sidebar-overlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden transition-opacity backdrop-blur-sm" onclick="toggleSidebar()"></div>
+    <!-- Background Elements -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-brand-600/20 via-emerald-900/10 to-transparent blur-3xl opacity-60"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-900/10 blur-3xl rounded-full"></div>
+    </div>
 
-        <!-- Sidebar -->
-        <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 lg:w-80 glass-panel border-r border-slate-800 flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
-            <!-- Header Brand -->
-            <div class="p-5 border-b border-slate-800/80 flex items-center justify-between bg-slate-900/40">
-                <div class="flex items-center space-x-3">
-                <img src="bahan-ajar/img/logo-iain.png" alt="Logo IAIN SAS Babel" class="w-10 h-10 object-contain drop-shadow-md">
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800/80 backdrop-blur-md bg-slate-950/70 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="img/logo-iain.png" alt="Logo IAIN SAS Babel" class="w-10 h-10 object-contain drop-shadow-md" onerror="this.src='https://via.placeholder.com/40?text=IAIN'">
                 <div>
-                    <h1 class="font-cinzel font-bold text-base text-slate-100 tracking-wide">SOSIOLOGI</h1>
-                    <p class="text-xs text-brand-400 font-medium">Semester Genap 2025/2026</p>
+                    <h1 class="font-cinzel font-bold text-base sm:text-lg text-slate-100 tracking-wide">MODUL DIGITAL</h1>
+                    <p class="text-xs text-brand-400 font-medium hidden sm:block">Fakultas Tarbiyah - IAIN SAS Bangka Belitung</p>
                 </div>
             </div>
-                <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white p-2">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
+            <a href="#matakuliah" class="px-4 py-2 text-xs sm:text-sm font-semibold text-brand-400 border border-brand-500/30 rounded-xl hover:bg-brand-500/10 transition duration-300">
+                Pilih Mata Kuliah
+            </a>
+        </div>
+    </header>
 
-            <!-- Lecturer Info Badge -->
-            <div class="px-5 py-3.5 bg-slate-900/60 border-b border-slate-800/60 flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-full bg-slate-800 border border-brand-500/40 flex items-center justify-center text-brand-400 font-bold text-sm">
-                    DM
-                </div>
-                <div class="overflow-hidden">
-                    <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Dosen Pengampu</p>
-                    <p class="text-sm font-semibold text-slate-200 truncate">Diah Meitikasari, M.Si.</p>
-                    <p class="text-[11px] text-slate-400">IAIN SAS Bangka Belitung</p>
-                </div>
-            </div>
-
-            <!-- Navigation Links -->
-            <div class="flex-1 overflow-y-auto py-4 px-3 space-y-1.5" id="nav-container">
-                <!-- Injected via JavaScript -->
-            </div>
-
-            <!-- Sidebar Footer / Quick Tools -->
-            <div class="p-4 border-t border-slate-800/80 bg-slate-900/40 text-xs text-slate-400 flex items-center justify-between">
-                <span><i class="fa-solid fa-shield-halved text-brand-400 mr-1.5"></i> Modul digital</span>
-                <button onclick="triggerSearchModal()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center space-x-1">
-                    <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-                    <span>Cari</span>
-                </button>
-            </div>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
+    <!-- Hero Section (Dengan Animasi di Tengah) -->
+    <section class="relative pt-12 pb-16 md:pt-20 md:pb-24 px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-4xl mx-auto">
             
-            <!-- Top Navigation Bar -->
-            <header class="h-16 glass-panel border-b border-slate-800 flex items-center justify-between px-4 lg:px-8 z-30 shrink-0">
-                <div class="flex items-center space-x-4">
-                    <button onclick="toggleSidebar()" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800/60 transition">
-                        <i class="fa-solid fa-bars text-lg"></i>
-                    </button>
-                    <div class="flex items-center space-x-2">
-                        <span id="breadcrumb-category" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 uppercase tracking-widest">Sistem Bahan Ajar</span>
-                        <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
-                        <span id="breadcrumb-title" class="text-sm font-medium text-slate-300 truncate max-w-[200px] sm:max-w-md">Rencana Pembelajaran Semester (RPS)</span>
+            <!-- Tag Badge -->
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-medium mb-6">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>Prodi Bimbingan dan Konseling Islam</span>
+            </div>
+
+            <!-- Animasi Lottie Modul Digital (Di Tengah Besar) -->
+            <div class="w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-4 flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-brand-500/10 rounded-full blur-2xl -z-10 animate-pulse"></div>
+                <!-- Menggunakan Lottie Player untuk Animasi E-Book / Edukasi Interaktif -->
+                <dotlottie-player 
+                    src="https://lottie.host/801a6104-a1fb-4299-9686-35b91b5c4786/aBvF11qFm8.lottie" 
+                    background="transparent" 
+                    speed="1" 
+                    style="width: 100%; height: 100%;" 
+                    loop 
+                    autoplay>
+                </dotlottie-player>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 leading-tight mb-6">
+                Platform Pembelajaran <br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-brand-400 via-emerald-400 to-teal-200 bg-clip-text text-transparent">
+                    Modul Digital Interaktif
+                </span>
+            </h1>
+
+            <p class="text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+                Selamat datang di repository modul digital berbasis web interaktif. Dirancang untuk menunjang proses pembelajaran mahasiswa Prodi BKI, Fakultas Tarbiyah, IAIN Syaikh Abdurrahman Siddik Bangka Belitung.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#matakuliah" class="px-6 py-3.5 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-500 hover:to-emerald-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-500/25 transition duration-300 flex items-center space-x-2">
+                    <span>Mulai Belajar</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#fitur" class="px-6 py-3.5 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-semibold rounded-xl transition duration-300">
+                    Pelajari Fitur
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Modul Digital -->
+    <section id="fitur" class="py-16 bg-slate-900/40 border-y border-slate-800/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 mb-3 font-cinzel">Keunggulan Modul</h2>
+                <p class="text-slate-400 text-sm">Dirancang menggunakan teknologi web modern untuk kenyamanan membaca dan fleksibilitas akses.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Fitur 1 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/40 transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4">
+                        <i data-lucide="smartphone" class="w-6 h-6"></i>
                     </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Responsive & Mobile Friendly</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Akses modul dengan nyaman melalui berbagai perangkat: Laptop, Tablet, maupun Smartphone tanpa kendala tampilan.
+                    </p>
                 </div>
 
-                <div class="flex items-center space-x-3">
-                    <button onclick="openBookmarksModal()" class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-brand-400 hover:border-brand-500/40 transition relative group" title="Materi Tersimpan">
-                        <i class="fa-solid fa-bookmark"></i>
-                        <span id="bookmark-count" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-500 text-slate-950 text-[10px] font-bold rounded-full flex items-center justify-center hidden">0</span>
-                    </button>
-                    <a href="https://drive.google.com/file/d/1Vdd_jvUuxWERXeClqa3vhYSFcZAPb909/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-emerald-600 text-white font-medium text-sm shadow-lg shadow-brand-600/20 hover:from-brand-500 hover:to-emerald-500 transition">
-                        <i class="fa-solid fa-file-pdf"></i>
-                        <span>Unduh RPS PDF</span>
+                <!-- Fitur 2 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/40 transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4">
+                        <i data-lucide="book-open-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Materi Terstruktur</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Dilengkapi dengan navigasi sidebar interaktif, pencarian cepat, bab ringkasan, dan latihan mandiri secara terstruktur.
+                    </p>
+                </div>
+
+                <!-- Fitur 3 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/40 transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Akses Cepat & Ringan</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Dihosting di GitHub Pages yang cepat, stabil, serta hemat kuota internet tanpa perlu unduh berkas PDF tebal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Mata Kuliah (Menggunakan Konsep Interactive Learning Portal Card) -->
+    <section id="matakuliah" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-brand-400 text-xs uppercase tracking-widest font-semibold">Katalog Pembelajaran</span>
+                <h2 class="text-3xl font-extrabold text-slate-100 mt-1 font-cinzel">Pilih Mata Kuliah</h2>
+            </div>
+            <p class="text-slate-400 text-sm mt-2 md:mt-0 max-w-md">
+                Pilih modul pembelajaran digital di bawah ini untuk memulai membaca materi perkuliahan.
+            </p>
+        </div>
+
+        <!-- Grid Card Mata Kuliah -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Card 1: Sosiologi -->
+            <div class="group relative bg-slate-900/90 border border-slate-800 hover:border-brand-500/50 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/10 flex flex-col justify-between overflow-hidden">
+                <!-- Hiasan Background Glow -->
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl group-hover:bg-brand-500/20 transition duration-500"></div>
+
+                <div>
+                    <!-- Badge & Icon -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/20 to-emerald-700/20 border border-brand-500/30 flex items-center justify-center text-brand-400">
+                            <i data-lucide="users" class="w-7 h-7"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+                            Mata Kuliah
+                        </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-slate-100 group-hover:text-brand-400 transition duration-300 mb-3">
+                        Sosiologi
+                    </h3>
+                    
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Modul pembelajaran digital interaktif mengenai konsep dasar sosiologi, struktur sosial, interaksi, serta fenomena masyarakat modern.
+                    </p>
+                </div>
+
+                <div class="pt-6 border-t border-slate-800/80 flex items-center justify-between">
+                    <div class="text-xs text-slate-400">
+                        <span class="block text-slate-500">Dosen Pengampu</span>
+                        <span class="font-medium text-slate-300">Diah Meitikasari, M.Si.</span>
+                    </div>
+                    <!-- Link ke halaman sosiologi Anda -->
+                    <a href="/sosiologi/index.html" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold transition duration-300 shadow-md">
+                        <span>Buka Modul</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
                     </a>
-                    <button onclick="openQuizModal()" class="hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-emerald-600 text-white font-medium text-sm shadow-lg shadow-brand-600/20 hover:from-brand-500 hover:to-emerald-500 transition">
-                        <i class="fa-solid fa-brain"></i>
-                        <span>Uji Pemahaman</span>
-                    </button>
                 </div>
-            </header>
+            </div>
 
-            <!-- Dynamic Content Viewport -->
-            <div id="main-viewport" class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-10 relative">
-                <!-- Dynamically rendered content goes here -->
-            </div>
-        </main>
-    </div>
+            <!-- Card 2: Konseling Multikultural -->
+            <div class="group relative bg-slate-900/90 border border-slate-800 hover:border-brand-500/50 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/10 flex flex-col justify-between overflow-hidden">
+                <!-- Hiasan Background Glow -->
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition duration-500"></div>
 
-    <!-- Search Modal -->
-    <div id="search-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-start justify-center pt-20 px-4 hidden">
-        <div class="glass-panel w-full max-w-2xl rounded-2xl border border-slate-700/80 shadow-2xl overflow-hidden animate-fade-in">
-            <div class="p-4 border-b border-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-magnifying-glass text-brand-400 text-lg"></i>
-                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Cari topik, konsep, tokoh, atau bab materi..." class="w-full bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none text-base">
-                <button onclick="closeSearchModal()" class="text-slate-400 hover:text-white px-2 py-1 rounded bg-slate-800 text-xs">ESC</button>
+                <div>
+                    <!-- Badge & Icon -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-700/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                            <i data-lucide="globe-2" class="w-7 h-7"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+                            Mata Kuliah
+                        </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-slate-100 group-hover:text-emerald-400 transition duration-300 mb-3">
+                        Konseling Multikultural
+                    </h3>
+                    
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Pendekatan dan teknik bimbingan konseling berkeadaban dalam menghadapi keberagaman budaya, norma, dan latar belakang klien.
+                    </p>
+                </div>
+
+                <div class="pt-6 border-t border-slate-800/80 flex items-center justify-between">
+                    <div class="text-xs text-slate-400">
+                        <span class="block text-slate-500">Prodi</span>
+                        <span class="font-medium text-slate-300">Bimbingan & Konseling Islam</span>
+                    </div>
+                    <!-- Link placeholder ke modul konseling multikultural -->
+                    <a href="#" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition duration-300">
+                        <span>Segera Hadir</span>
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                    </a>
+                </div>
             </div>
-            <div id="search-results" class="max-h-96 overflow-y-auto p-3 space-y-2">
-                <div class="text-center py-8 text-slate-500 text-sm">Ketik kata kunci untuk mencari di seluruh materi kuliah sosiologi...</div>
-            </div>
+
         </div>
-    </div>
+    </section>
 
-    <!-- Quiz Modal -->
-    <div id="quiz-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-panel w-full max-w-xl rounded-2xl border border-slate-700/80 shadow-2xl p-6 relative animate-fade-in">
-            <button onclick="closeQuizModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <div id="quiz-content">
-                <!-- Injected via JavaScript -->
-            </div>
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-medium text-slate-300">Prodi Bimbingan dan Konseling Islam</p>
+            <p class="mt-1">Fakultas Tarbiyah - IAIN Syaikh Abdurrahman Siddik Bangka Belitung</p>
+            <p class="mt-4 text-slate-400">&copy; 2026 Modul Digital Interaktif. All Rights Reserved.</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- JavaScript Application Logic -->
+    <!-- Lucide Icon Initializer -->
     <script>
-        const courseData = {
-            lecturer: "Diah Meitikasari, M.Si.",
-            university: "IAIN SAS Bangka Belitung",
-            faculty: "Fakultas Dakwah dan Komunikasi Islam",
-            studyProgram: "Program Studi Psikologi Islam",
-            semester: "Genap 2025/2026",
-            code: "PSI088",
-            sks: "2 SKS",
-            
-            navItems: [
-                { id: 'rps', title: 'Rencana Pembelajaran (RPS)', icon: 'fa-file-lines', type: 'rps' },
-                { id: 'materi-1', title: '1. Pengantar Sosiologi', subtitle: 'Keanekaragaman & Relasi Psikologi', icon: 'fa-book-open', type: 'material', index: 1 },
-                { id: 'materi-2', title: '2. Solidaritas: Emile Durkheim', subtitle: 'Solidaritas Mekanik & Organik', icon: 'fa-users', type: 'material', index: 2 },
-                { id: 'materi-3', title: '3. Kelas: Karl Marx', subtitle: 'Borjuis, Proletar & Konflik Sosial', icon: 'fa-scale-balanced', type: 'material', index: 3 },
-                { id: 'materi-4', title: '4. Makna: Max Weber', subtitle: 'Tindakan Sosial & Birokrasi', icon: 'fa-lightbulb', type: 'material', index: 4 },
-                { id: 'materi-5', title: '5. Interaksi: Georg Simmel', subtitle: 'Mikrointeraksi & Bentuk Sosial', icon: 'fa-network-wired', type: 'material', index: 5 },
-                { id: 'materi-6', title: '6. Sistem: Talcott Parsons', subtitle: 'Fungsionalisme Struktural & AGIL', icon: 'fa-cubes', type: 'material', index: 6 },
-                { id: 'materi-7', title: '7. Etika: Zygmunt Bauman', subtitle: 'Postmodernitas & Masyarakat Cair', icon: 'fa-compass', type: 'material', index: 7 },
-                { id: 'materi-8', title: '8. Arena: Pierre Bourdieu', subtitle: 'Modal, Habitus & Arena Sosial', icon: 'fa-chess', type: 'material', index: 8 },
-                { id: 'materi-9', title: '9. Kekuasaan: Michel Foucault', subtitle: 'Relasi Kuasa, Pengetahuan & Disiplin', icon: 'fa-eye', type: 'material', index: 9 },
-                { id: 'materi-10', title: '10. Kolonial: Edward Said', subtitle: 'Orientalisme & Wacana Pascakolonial', icon: 'fa-globe', type: 'material', index: 10 }
-            ]
-        };
-
-        const rpsSubTabs = [
-            { id: 'identitas', title: 'Identitas & Otorisasi', icon: 'fa-id-card' },
-            { id: 'cpmk', title: 'Capaian Pembelajaran (CPMK)', icon: 'fa-bullseye' },
-            { id: 'deskripsi', title: 'Deskripsi & Bahan Kajian', icon: 'fa-book' },
-            { id: 'pustaka', title: 'Referensi & Pustaka', icon: 'fa-bookmark' },
-            { id: 'evaluasi', title: 'Portofolio & Penilaian', icon: 'fa-chart-pie' }
-        ];
-
-        let currentActiveId = 'rps';
-        let currentRpsTab = 'identitas';
-        let materialTabs = {}; // stores active sub-tab for each material
-        let bookmarks = JSON.parse(localStorage.getItem('sosiologi_bookmarks') || '[]');
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSidebar();
-            navigateTo('rps');
-            updateBookmarkBadge();
-        });
-
-        function renderSidebar() {
-            const container = document.getElementById('nav-container');
-            container.innerHTML = courseData.navItems.map(item => {
-                const isActive = currentActiveId === item.id;
-                return `
-                    <button onclick="navigateTo('${item.id}')" class="w-full flex items-center space-x-3 px-3.5 py-3 rounded-xl transition font-medium text-sm group ${isActive ? 'bg-brand-500/15 text-brand-400 border border-brand-500/30 shadow-lg shadow-brand-500/5' : 'text-slate-300 hover:bg-slate-800/60 hover:text-white'}">
-                        <div class="w-8 h-8 rounded-lg ${isActive ? 'bg-brand-500 text-slate-950' : 'bg-slate-800 text-slate-400 group-hover:text-slate-200'} flex items-center justify-center transition shrink-0">
-                            <i class="fa-solid ${item.icon} text-sm"></i>
-                        </div>
-                        <div class="text-left truncate">
-                            <p class="truncate leading-tight">${item.title}</p>
-                            ${item.subtitle ? `<p class="text-[11px] text-slate-500 truncate mt-0.5">${item.subtitle}</p>` : ''}
-                        </div>
-                    </button>
-                `;
-            }).join('');
-        }
-
-        function navigateTo(id) {
-            currentActiveId = id;
-            renderSidebar();
-            
-            // Close mobile sidebar if open
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-
-            const item = courseData.navItems.find(i => i.id === id);
-            if (!item) return;
-
-            document.getElementById('breadcrumb-category').innerText = item.type === 'rps' ? 'Dokumen Kurikulum' : `Materi Kuliah ${item.index}`;
-            document.getElementById('breadcrumb-title').innerText = item.title;
-
-            const viewport = document.getElementById('main-viewport');
-            viewport.scrollTop = 0;
-
-            if (item.type === 'rps') {
-                renderRpsView(viewport);
-            } else {
-                renderMaterialView(viewport, item.index);
-            }
-        }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-
-        function renderRpsView(container) {
-            container.innerHTML = `
-                <div class="max-w-5xl mx-auto space-y-6 animate-fade-in pb-16">
-                    <!-- Banner Header -->
-                    <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-700/60 relative overflow-hidden bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-brand-950/30 shadow-xl">
-                        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-semibold tracking-wider uppercase border border-brand-500/30">Rencana Pembelajaran Semester</span>
-                                <h2 class="text-2xl sm:text-3xl font-cinzel font-bold text-white mt-2">Mata Kuliah: Sosiologi (${courseData.code})</h2>
-                                <p class="text-slate-400 text-sm mt-1">Bobot: ${courseData.sks} | Semester: ${courseData.semester} | Prodi Psikologi Islam</p>
-                            </div>
-                            <div class="flex items-center space-x-3 shrink-0">
-                                <button onclick="toggleBookmark('rps-doc')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-sm font-medium transition flex items-center space-x-2">
-                                    <i class="fa-solid fa-bookmark ${isBookmarked('rps-doc') ? 'text-brand-400' : ''}"></i>
-                                    <span>${isBookmarked('rps-doc') ? 'Disimpan' : 'Simpan RPS'}</span>
-                                </button>
-                                <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium transition flex items-center space-x-2 shadow-lg shadow-brand-600/20">
-                                    <i class="fa-solid fa-print"></i>
-                                    <span>Cetak PDF</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- RPS Sub-navigation Tabs -->
-                    <div class="flex overflow-x-auto pb-2 gap-2 scrollbar-none">
-                        ${rpsSubTabs.map(tab => `
-                            <button onclick="switchRpsTab('${tab.id}')" class="px-4 py-2.5 rounded-xl text-sm font-medium transition shrink-0 flex items-center space-x-2 ${currentRpsTab === tab.id ? 'bg-brand-500 text-slate-950 font-semibold shadow-lg shadow-brand-500/20' : 'glass-panel text-slate-300 hover:bg-slate-800/80'}">
-                                <i class="fa-solid ${tab.icon}"></i>
-                                <span>${tab.title}</span>
-                            </button>
-                        `).join('')}
-                    </div>
-
-                    <!-- RPS Tab Content Area -->
-                    <div id="rps-tab-content" class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800/80 shadow-2xl">
-                        <!-- Content rendered dynamically -->
-                    </div>
-                </div>
-            `;
-            renderRpsTabContent();
-        }
-
-        function switchRpsTab(tabId) {
-            currentRpsTab = tabId;
-            renderRpsView(document.getElementById('main-viewport'));
-        }
-
-        function renderRpsTabContent() {
-            const contentContainer = document.getElementById('rps-tab-content');
-            if (!contentContainer) return;
-
-            switch(currentRpsTab) {
-                case 'identitas':
-                    contentContainer.innerHTML = `
-                        <div class="space-y-6 animate-fade-in">
-                            <h3 class="text-xl font-cinzel font-bold text-white flex items-center space-x-3 border-b border-slate-800 pb-4">
-                                <i class="fa-solid fa-id-card text-brand-400"></i>
-                                <span>Identitas Mata Kuliah & Otorisasi</span>
-                            </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
-                                    <h4 class="text-xs font-semibold uppercase text-brand-400 tracking-wider">Informasi Akademik</h4>
-                                    <ul class="mt-4 space-y-3 text-sm">
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Perguruan Tinggi</span> <span class="font-medium text-slate-200">IAIN SAS Bangka Belitung</span></li>
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Fakultas</span> <span class="font-medium text-slate-200">Dakwah & Komunikasi Islam</span></li>
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Program Studi</span> <span class="font-medium text-slate-200">Psikologi Islam</span></li>
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Mata Kuliah / Kode</span> <span class="font-medium text-slate-200">Sosiologi (${courseData.code})</span></li>
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Bobot SKS</span> <span class="font-medium text-slate-200">2 SKS (T=2, P=0)</span></li>
-                                        <li class="flex justify-between pb-2"><span class="text-slate-400">Semester</span> <span class="font-medium text-slate-200">2 (Genap 2025/2026)</span></li>
-                                    </ul>
-                                </div>
-                                <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
-                                    <h4 class="text-xs font-semibold uppercase text-brand-400 tracking-wider">Tim Pengampu & Otorisasi</h4>
-                                    <ul class="mt-4 space-y-3 text-sm">
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Dosen Pengampu</span> <span class="font-medium text-slate-200">Diah Meitikasari, M.Si.</span></li>
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">NIP Dosen</span> <span class="font-medium text-slate-200">199005292019032008</span></li>
-                                        <li class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Koordinator RMK</span> <span class="font-medium text-slate-200">Diah Meitikasari, M.Si.</span></li>
-                                        <li class="flex justify-between pb-2"><span class="text-slate-400">Ketua Program Studi</span> <span class="font-medium text-slate-200">Oktarizal Drianus, M.Psi.</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                case 'cpmk':
-                    contentContainer.innerHTML = `
-                        <div class="space-y-6 animate-fade-in">
-                            <h3 class="text-xl font-cinzel font-bold text-white flex items-center space-x-3 border-b border-slate-800 pb-4">
-                                <i class="fa-solid fa-bullseye text-brand-400"></i>
-                                <span>Capaian Pembelajaran Lulusan (CPL) & Mata Kuliah (CPMK)</span>
-                            </h3>
-                            <div class="space-y-4">
-                                <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
-                                    <h4 class="text-xs font-bold text-brand-400 uppercase tracking-widest">CPL yang Dibebankan</h4>
-                                    <ul class="mt-2 space-y-2 text-sm text-slate-300">
-                                        <li><strong class="text-white">CPL1 (S5):</strong> Menghargai keanekaragaman budaya, pandangan, agama, dan kepercayaan, serta pendapat atau temuan orisinal orang lain.</li>
-                                        <li><strong class="text-white">CPL2 (P9):</strong> Menguasai konsep teoritis utama (major concepts) tentang proses dan fungsi mental manusia dalam berbagai aspek kehidupan.</li>
-                                        <li><strong class="text-white">CPL3 (KU2):</strong> Mampu mengkaji implikasi pengembangan atau implementasi ilmu pengetahuan teknologi yang memperhatikan nilai humaniora.</li>
-                                        <li><strong class="text-white">CPL4 (KK24):</strong> Menguasai konsep teoritis mengenai hubungan manusia dan lingkungan sosial.</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
-                                    <h4 class="text-xs font-bold text-brand-400 uppercase tracking-widest">Capaian Pembelajaran Mata Kuliah (CPMK)</h4>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-                                        <div class="p-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-sm">
-                                            <span class="font-bold text-brand-400">CPMK1:</span> Menghargai nilai-nilai keanekaragaman dalam budaya, pandangan, agama, dan kepercayaan.
-                                        </div>
-                                        <div class="p-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-sm">
-                                            <span class="font-bold text-brand-400">CPMK2:</span> Menguasai konsep-konsep utama (major concepts) pemikiran sosiologi klasik hingga kontemporer.
-                                        </div>
-                                        <div class="p-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-sm">
-                                            <span class="font-bold text-brand-400">CPMK3:</span> Menerapkan kajian implikasi pengembangan keilmuan psikologi berdasarkan nilai humaniora.
-                                        </div>
-                                        <div class="p-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-sm">
-                                            <span class="font-bold text-brand-400">CPMK4:</span> Menguasai konsep dasar sosiologi kaitannya bagi psikologi secara interdisipliner.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                case 'deskripsi':
-                    contentContainer.innerHTML = `
-                        <div class="space-y-6 animate-fade-in">
-                            <h3 class="text-xl font-cinzel font-bold text-white flex items-center space-x-3 border-b border-slate-800 pb-4">
-                                <i class="fa-solid fa-book text-brand-400"></i>
-                                <span>Deskripsi Singkat & Bahan Kajian</span>
-                            </h3>
-                            <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 text-sm leading-relaxed text-slate-300">
-                                <p><strong class="text-white">Deskripsi Singkat MK:</strong> Mata kuliah Sosiologi merupakan salah satu mata kuliah wajib yang mengkaji secara interdisipliner tentang objek kajian sosiologi kaitannya dengan psikologi. Sosiologi pada prodi psikologi menyajikan konsep-konsep utama teori-teori sosial dari klasik hingga kontemporer. Mata kuliah ini diharapkan mampu memberikan perspektif sosiologis kepada mahasiswa psikologi mengenai relasi manusia dan lingkungan sosialnya dalam pemecahan masalah-masalah psikologis baik di level individu, komunitas, maupun masyarakat.</p>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-brand-400 uppercase tracking-widest mb-3">10 Materi Utama Perkuliahan</h4>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">1</span><span>Pengantar: Keanekaragaman & Relasi Psikologi</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">2</span><span>Solidaritas: Emile Durkheim</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">3</span><span>Kelas: Karl Marx</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">4</span><span>Makna: Max Weber</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">5</span><span>Interaksi: Georg Simmel</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">6</span><span>Sistem: Talcott Parsons</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">7</span><span>Etika: Zygmunt Bauman</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">8</span><span>Arena: Pierre Bourdieu</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">9</span><span>Kekuasaan: Michel Foucault</span></div>
-                                    <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center space-x-3"><span class="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 font-bold flex items-center justify-center text-xs">10</span><span>Kolonial: Edward Said</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                case 'pustaka':
-                    contentContainer.innerHTML = `
-                        <div class="space-y-6 animate-fade-in">
-                            <h3 class="text-xl font-cinzel font-bold text-white flex items-center space-x-3 border-b border-slate-800 pb-4">
-                                <i class="fa-solid fa-bookmark text-brand-400"></i>
-                                <span>Referensi Pustaka Utama & Pendukung</span>
-                            </h3>
-                            <div class="space-y-4">
-                                <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
-                                    <h4 class="text-xs font-bold text-brand-400 uppercase tracking-widest mb-3">Pustaka Utama</h4>
-                                    <ul class="space-y-2.5 text-sm text-slate-300">
-                                        <li class="flex items-start space-x-2"><i class="fa-solid fa-book-bookmark text-brand-400 mt-1"></i><span>Ritzer, G. (2012). <em>Teori Sosiologi Dari Sosiologi Klasik Hingga Perkembangan Terakhir Postmodern</em>. Yogyakarta: Pustaka Pelajar.</span></li>
-                                        <li class="flex items-start space-x-2"><i class="fa-solid fa-book-bookmark text-brand-400 mt-1"></i><span>Kurniawan, K. N. (2020). <em>Kisah Sosiologi: Pemikiran yang Mengubah Dunia dan Relasi Manusia</em>. Jakarta: Yayasan Pustaka Obor.</span></li>
-                                        <li class="flex items-start space-x-2"><i class="fa-solid fa-book-bookmark text-brand-400 mt-1"></i><span>Soekanto, S. (1990). <em>Sosiologi Sebagai Suatu Pengantar</em>. Jakarta: Rajawali Pers.</span></li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
-                                    <h4 class="text-xs font-bold text-brand-400 uppercase tracking-widest mb-3">Pustaka Pendukung & Jurnal Dosen</h4>
-                                    <ul class="space-y-2.5 text-sm text-slate-300">
-                                        <li class="flex items-start space-x-2"><i class="fa-solid fa-file-lines text-brand-400 mt-1"></i><span>Meitikasari, D., & Drianus, O. (2021). Rekognisi Axel Honneth: Gramatika Moral Bagi Defisit Rasionalitas Beragama. <em>Jaqfi</em>, 6(1), 24-47.</span></li>
-                                        <li class="flex items-start space-x-2"><i class="fa-solid fa-file-lines text-brand-400 mt-1"></i><span>Drianus, O., Meitikasari, D., & Dinata, R. (2019). Hegemonic Masculinity: Wacana Relasi Gender dalam Tinjauan Psikologi Sosial. <em>Psychosophia</em>, 1(1), 36-50.</span></li>
-                                        <li class="flex items-start space-x-2"><i class="fa-solid fa-file-lines text-brand-400 mt-1"></i><span>Meitikasari, D. (2022). Hyperreality Game Online Menjerumuskan Gamer Menjadi Hyper-Life?. <em>Sosioglobal</em>, 6(2), 185-203.</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                case 'evaluasi':
-                    contentContainer.innerHTML = `
-                        <div class="space-y-6 animate-fade-in">
-                            <h3 class="text-xl font-cinzel font-bold text-white flex items-center space-x-3 border-b border-slate-800 pb-4">
-                                <i class="fa-solid fa-chart-pie text-brand-400"></i>
-                                <span>Portofolio Penilaian & Evaluasi Ketercapaian</span>
-                            </h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 text-center">
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Tugas & Review</p>
-                                    <p class="text-2xl font-bold text-brand-400 mt-1">40%</p>
-                                    <p class="text-xs text-slate-500 mt-1">Tugas 1 - 4</p>
-                                </div>
-                                <div class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 text-center">
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Paper Analisis</p>
-                                    <p class="text-2xl font-bold text-brand-400 mt-1">30%</p>
-                                    <p class="text-xs text-slate-500 mt-1">Tugas 5 & Analisis Isu</p>
-                                </div>
-                                <div class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 text-center">
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">ETS & EAS</p>
-                                    <p class="text-2xl font-bold text-brand-400 mt-1">30%</p>
-                                    <p class="text-xs text-slate-500 mt-1">Ujian Tengah & Akhir Semester</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-            }
-        }
-
-        const materialContentDB = {
-            1: {
-                title: "1. Pengantar: Keanekaragaman & Relasi Psikologi",
-                subtitle: "Asal-usul Sosiologi, Fakta Sosial, dan Hubungannya dengan Psikologi",
-                tabs: [
-                    { id: 'konsep', title: 'Konsep Dasar', icon: 'fa-compass' },
-                    { id: 'tokoh', title: 'Lahirnya Sosiologi', icon: 'fa-landmark' },
-                    { id: 'ilmu', title: 'Relasi Keilmuan', icon: 'fa-network-wired' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    konsep: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Pengantar & Perspektif Sosiologis</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Manusia sejak lahir sudah berhubungan dengan manusia dan lingkungan sekitarnya, mulai dari orang tua hingga tempat tinggalnya (Thomas Ford Hoult). Semakin dewasa, pergaulan semakin luas dan menyadari adanya kesamaan serta perbedaan dalam masyarakat. Ini adalah pengetahuan awal yang bersifat sosiologis.</p>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 my-4">
-                            <h5 class="font-semibold text-brand-400 text-sm mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Aristoteles: Human is Zoon Politicon</h5>
-                            <p class="text-slate-300 text-xs leading-relaxed">Manusia sebagai makhluk yang pada dasarnya selalu ingin bergaul dan hidup bersama dalam masyarakat (social animal).</p>
-                        </div>
-                    `,
-                    tokoh: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Kelahiran Sosiologi sebagai Ilmu</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Abad ke-19 menyaksikan lahirnya sosiologi di tengah perubahan sosial yang masif akibat Revolusi Industri dan Revolusi Perancis. Sosiologi lahir dari rahim filsafat sosial.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                                <h5 class="font-bold text-white text-sm">Auguste Comte (Bapak Sosiologi)</h5>
-                                <p class="text-slate-400 text-xs mt-1">Mencetuskan istilah Sosiologi tahun 1842. Membagi kajian atas Statika Sosial (keteraturan) dan Dinamika Sosial (perubahan & kemajuan).</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                                <h5 class="font-bold text-white text-sm">Unsur Ilmu Pengetahuan</h5>
-                                <p class="text-slate-400 text-xs mt-1">Bersifat Empiris (berdasar observasi), Teoritis (menyusun abstraksi), Kumulatif (memperbaiki teori lama), dan Nonetis (menjelaskan fakta secara objektif).</p>
-                            </div>
-                        </div>
-                    `,
-                    ilmu: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Relasi Sosiologi dengan Ilmu Lain</h4>
-                        <div class="space-y-3 text-sm text-slate-300">
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800"><strong>1. Sosiologi & Psikologi:</strong> Sosiologi meneliti struktur sosial, psikologi meneliti proses mental individu. Keduanya beririsan dalam memahami bagaimana norma sosial membentuk perilaku dan kepribadian.</div>
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800"><strong>2. Sosiologi & Antropologi:</strong> Sosiologi berfokus pada dinamika masyarakat modern, antropologi berfokus pada keragaman budaya dan tradisi.</div>
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800"><strong>3. Sosiologi & Ekonomi:</strong> Menganalisis bagaimana stratifikasi sosial dan kelas memengaruhi akses ekonomi serta ketimpangan.</div>
-                        </div>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 1</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 1: Review Fakta Sosial & Keragaman</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Susunlah esai singkat (300-500 kata) yang menjelaskan fakta sosial mengenai keragaman nilai budaya atau agama di lingkungan sekitar Anda dalam perspektif sosiologis serta kaitannya dengan respons psikologis individu.</p>
-                            <button onclick="triggerQuiz(1)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 1</button>
-                        </div>
-                    `
-                }
-            },
-            2: {
-                title: "2. Solidaritas: Emile Durkheim",
-                subtitle: "Solidaritas Mekanik, Organik, dan Fakta Sosial",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi & Konsep', icon: 'fa-user-tie' },
-                    { id: 'solidaritas', title: 'Tipe Solidaritas', icon: 'fa-link' },
-                    { id: 'fakta', title: 'Fakta Sosial', icon: 'fa-shield' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Emile Durkheim (1858-1917)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Sosiolog terkemuka asal Prancis yang meletakkan fondasi sosiologi modern. Ia menekankan bahwa masyarakat adalah realitas sui generis (memiliki realitas tersendiri terpisah dari individu).</p>
-                    `,
-                    solidaritas: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Solidaritas Mekanik & Organik</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                                <h5 class="font-bold text-white text-sm">Solidaritas Mekanik</h5>
-                                <p class="text-slate-400 text-xs mt-1">Terdapat pada masyarakat tradisional. Didasarkan pada kesamaan kolektif, sedikit pembagian kerja, dan kesadaran kolektif yang kuat.</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                                <h5 class="font-bold text-white text-sm">Solidaritas Organik</h5>
-                                <p class="text-slate-400 text-xs mt-1">Terdapat pada masyarakat industri modern. Didasarkan pada kompleksitas pembagian kerja dan tingkat saling ketergantungan (interdependensi) yang tinggi.</p>
-                            </div>
-                        </div>
-                    `,
-                    fakta: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Teori Fakta Sosial</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Fakta sosial adalah cara bertindak, berpikir, dan berperasaan yang memiliki kekuatan memaksa di luar individu. Contohnya hukum, moral, dan kebiasaan.</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 2</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 2: Pemetaan Solidaritas Sosial</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Buatlah tabel perbandingan antara bentuk solidaritas mekanik di pedesaan dengan solidaritas organik di perkotaan modern beserta analisis dampaknya terhadap kesehatan mental individu.</p>
-                            <button onclick="triggerQuiz(2)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 2</button>
-                        </div>
-                    `
-                }
-            },
-            3: {
-                title: "3. Kelas: Karl Marx",
-                subtitle: "Borjuis, Proletar, dan Teori Konflik Sosial",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Marx', icon: 'fa-user-tie' },
-                    { id: 'konsep', title: 'Kelas & Alat Produksi', icon: 'fa-industry' },
-                    { id: 'konflik', title: 'Dinamika Konflik', icon: 'fa-fire' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Karl Marx (1818-1883)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Filosof dan ekonom Jerman yang menjadi tokoh sentral dalam teori konflik sosial. Marx melihat sejarah masyarakat sebagai sejarah perjuangan kelas.</p>
-                    `,
-                    konsep: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Stratifikasi & Kepemilikan Alat Produksi</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                                <h5 class="font-bold text-white text-sm">Kaum Borjuis</h5>
-                                <p class="text-slate-400 text-xs mt-1">Pemilik modal, pabrik, dan alat-alat produksi utama dalam sistem kapitalis.</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                                <h5 class="font-bold text-white text-sm">Kaum Proletar</h5>
-                                <p class="text-slate-400 text-xs mt-1">Para pekerja atau buruh yang tidak memiliki alat produksi dan menjual tenaga kerjanya.</p>
-                            </div>
-                        </div>
-                    `,
-                    konflik: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Eksploitasi & Kesadaran Kelas</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Konflik kelas muncul akibat surplus nilai (surplus value) yang diambil dari buruh. Ketika kaum proletar memiliki kesadaran kelas, revolusi sosial terjadi untuk meruntuhkan struktur penindasan.</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 3</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 3: Analisis Konflik Kelas Modern</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Analisis hubungan buruh pabrik atau pekerja gig economy (ojek online/freelancer) dalam kacamata teori konflik Karl Marx.</p>
-                            <button onclick="triggerQuiz(3)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 3</button>
-                        </div>
-                    `
-                }
-            },
-            4: {
-                title: "4. Makna: Max Weber",
-                subtitle: "Tindakan Sosial, Etika Protestan, dan Birokrasi",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Weber', icon: 'fa-user-tie' },
-                    { id: 'tindakan', title: '4 Tipe Tindakan Sosial', icon: 'fa-brain' },
-                    { id: 'stratifikasi', title: 'Stratifikasi 3 Dimensi', icon: 'fa-layer-group' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Max Weber (1864-1920)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Sosiolog Jerman yang menekankan pentingnya pemahaman subjektif (Verstehen) dalam menganalisis tindakan sosial manusia.</p>
-                    `,
-                    tindakan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Empat Tipe Tindakan Sosial Weber</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>1. Tujuan-Rasional:</strong> Tindakan berorientasi kalkulasi rasional untuk mencapai tujuan (ekonomis/teknis).</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>2. Nilai-Rasional:</strong> Tindakan berdasar keyakinan nilai etika, agama, atau estetika tanpa memperhitungkan hasil akhir.</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>3. Afektif:</strong> Tindakan yang didorong oleh emosi atau perasaan spontan (cinta, amarah, takut).</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>4. Tradisional:</strong> Tindakan yang dilakukan karena kebiasaan turun-temurun tanpa refleksi rasional.</div>
-                        </div>
-                    `,
-                    stratifikasi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Stratifikasi Sosial 3 Dimensi</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Selain kelas ekonomi, Weber melihat stratifikasi sosial dibentuk oleh:</p>
-                        <ul class="list-disc list-inside text-sm text-slate-300 space-y-1">
-                            <li><strong>Kelas (Class):</strong> Posisi ekonomi dan kepemilikan harta.</li>
-                            <li><strong>Status (Status Group):</strong> Dimensi kehormatan sosial atau prestise gaya hidup.</li>
-                            <li><strong>Partai (Party):</strong> Kekuasaan politik dan kemampuan mengorganisasi kelompok.</li>
-                        </ul>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 4</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 4: Klasifikasi Tindakan Sosial</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Berikan contoh nyata dari kehidupan mahasiswa sehari-hari untuk masing-masing dari 4 tipe tindakan sosial menurut Max Weber.</p>
-                            <button onclick="triggerQuiz(4)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 4</button>
-                        </div>
-                    `
-                }
-            },
-            5: {
-                title: "5. Interaksi: Georg Simmel",
-                subtitle: "Mikrointeraksi, Bentuk Sosial, dan Dinamika Kelompok",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Simmel', icon: 'fa-user-tie' },
-                    { id: 'konsep', title: 'Sosiologi Formal', icon: 'fa-shapes' },
-                    { id: 'interaksi', title: 'Bentuk Interaksi', icon: 'fa-people-arrows' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Georg Simmel (1858-1918)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Sosiolog Jerman yang memelopori sosiologi tingkat mikro (micro-sociology), berfokus pada bentuk-bentuk interaksi antarindividu dalam kehidupan sehari-hari.</p>
-                    `,
-                    konsep: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Sosiologi Formal & Geometri Sosial</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Simmel membedakan antara isi interaksi (motif psikologis) dan bentuk interaksi (pola hubungan seperti dominasi, subordinasi, kompetisi, dan pertukaran).</p>
-                    `,
-                    interaksi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Dinamika Dyad dan Triad</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Simmel mengkaji ukuran kelompok. Dyad (kelompok 2 orang) sangat rapuh karena bergantung pada kedua individu. Triad (kelompok 3 orang) memunculkan dinamika baru seperti koalisi dan strategi "pecah belah" (divide et impera).</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 5</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 5: Analisis Kelompok Kecil</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Amati dinamika kelompok pertemanan (kelompok belajar 3 orang) dan analisis menggunakan konsep Triad Georg Simmel.</p>
-                            <button onclick="triggerQuiz(5)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 5</button>
-                        </div>
-                    `
-                }
-            },
-            6: {
-                title: "6. Sistem: Talcott Parsons",
-                subtitle: "Fungsionalisme Struktural & Skema AGIL",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Parsons', icon: 'fa-user-tie' },
-                    { id: 'agil', title: 'Skema AGIL', icon: 'fa-cubes' },
-                    { id: 'fungsi', title: 'Fungsi Laten & Manifes', icon: 'fa-eye' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Talcott Parsons (1902-1979)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Sosiolog Amerika tokoh utama Fungsionalisme Struktural. Ia melihat masyarakat sebagai sistem sosial yang cenderung mencari keseimbangan (equilibrium).</p>
-                    `,
-                    agil: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Skema AGIL (Prasyarat Fungsional)</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>A - Adaptation (Adaptasi):</strong> Sistem harus menyesuaikan diri dengan lingkungan (ekonomi).</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>G - Goal Attainment (Pencapaian Tujuan):</strong> Menetapkan tujuan dan memobilisasi sumber daya (politik).</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>I - Integration (Integrasi):</strong> Menjaga solidaritas dan kohesi antarbagian (hukum/norma).</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>L - Latency (Pemeliharaan Pola):</strong> Memelihara nilai budaya dan mengatasi ketegangan (keluarga/agama).</div>
-                        </div>
-                    `,
-                    fungsi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Pengembangan Robert K. Merton</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Merton menyempurnakan fungsionalisme dengan membedakan <em>Fungsi Manifes</em> (konsekuensi yang dikehendaki dan disadari) dan <em>Fungsi Laten</em> (konsekuensi tersembunyi yang tidak disadari).</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 6</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 6: Analisis Institusi Pendidikan</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Bedah fungsi manifes dan fungsi laten dari lembaga Perguruan Tinggi di Indonesia menggunakan kacamata fungsionalisme.</p>
-                            <button onclick="triggerQuiz(6)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 6</button>
-                        </div>
-                    `
-                }
-            },
-            7: {
-                title: "7. Etika: Zygmunt Bauman",
-                subtitle: "Postmodernitas, Masyarakat Cair, dan Dilema Moral",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Bauman', icon: 'fa-user-tie' },
-                    { id: 'cair', title: 'Modernitas Cair (Liquid Modernity)', icon: 'fa-water' },
-                    { id: 'etika', title: 'Etika Postmodern', icon: 'fa-heart' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Zygmunt Bauman (1925-2017)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Sosiolog Polandia yang terkenal dengan analisis tajamnya mengenai transisi dari masyarakat modern padat (solid modernity) menuju masyarakat cair (liquid modernity).</p>
-                    `,
-                    cair: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Karakteristik Modernitas Cair</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Dalam era cair, segala bentuk ikatan sosial, pekerjaan, identitas, dan hubungan antarmanusia bersifat sementara, mudah berubah, dan tidak stabil. Individu dituntut untuk selalu fleksibel namun rentan mengalami kecemasan eksistensial.</p>
-                    `,
-                    etika: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tanggung Jawab Moral Tanpa Jaminan</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Bauman mengkritik etika modern yang birokratis dan menawarkan etika postmodern yang menekankan komitmen personal tak bersyarat terhadap "Sang Liyan" (the Other).</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 7</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 7: Refleksi Hubungan "Cair"</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Analisis fenomena hubungan percintaan instan (dating apps) dalam konteks konsep "liquid love" Zygmunt Bauman.</p>
-                            <button onclick="triggerQuiz(7)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 7</button>
-                        </div>
-                    `
-                }
-            },
-            8: {
-                title: "8. Arena: Pierre Bourdieu",
-                subtitle: "Modal, Habitus, dan Arena (Field) Sosial",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Bourdieu', icon: 'fa-user-tie' },
-                    { id: 'modal', title: 'Jenis-Jenis Modal', icon: 'fa-coins' },
-                    { id: 'habitus', title: 'Habitus & Arena', icon: 'fa-chess' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Pierre Bourdieu (1930-2002)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Sosiolog Prancis terkemuka yang mengkaji bagaimana reproduksi ketimpangan sosial terjadi melalui kebudayaan dan sistem pendidikan.</p>
-                    `,
-                    modal: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Empat Bentuk Modal Bourdieu</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>1. Modal Ekonomi:</strong> Sumber daya finansial, properti, dan kekayaan material.</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>2. Modal Budaya:</strong> Pengetahuan, keterampilan, gelar akademik, dan selera budaya.</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>3. Modal Sosial:</strong> Jaringan relasi sosial, koneksi, dan keanggotaan kelompok.</div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><strong>4. Modal Simbolik:</strong> Prestise, kehormatan, dan pengakuan sosial yang dilegitimasi.</div>
-                        </div>
-                    `,
-                    habitus: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Habitus & Arena (Field)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3"><strong>Habitus</strong> adalah sistem disposisi mental dan tubuh yang terinternalisasi dari lingkungan sosial. <strong>Arena</strong> adalah medan pertarungan sosial tempat aktor bersaing memperebutkan modal.</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 8</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 8: Analisis Modal Budaya</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Identifikasikan bagaimana modal budaya (seperti penguasaan bahasa atau sertifikasi keahlian) memengaruhi mobilitas sosial mahasiswa.</p>
-                            <button onclick="triggerQuiz(8)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 8</button>
-                        </div>
-                    `
-                }
-            },
-            9: {
-                title: "9. Kekuasaan: Michel Foucault",
-                subtitle: "Relasi Kuasa, Pengetahuan, dan Disiplin Tubuh",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Foucault', icon: 'fa-user-tie' },
-                    { id: 'kuasa', title: 'Kuasa-Pengetahuan', icon: 'fa-eye' },
-                    { id: 'disiplin', title: 'Panoptisme & Disiplin', icon: 'fa-building-shield' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Michel Foucault (1926-1984)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Filosof dan sejarawan Prancis yang mengubah cara pandang kita terhadap kekuasaan—bahwa kekuasaan bukanlah milik terpusat penguasa, melainkan jaringan relasi yang menyebar di seluruh struktur sosial.</p>
-                    `,
-                    kuasa: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Power/Knowledge (Kuasa-Pengetahuan)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Kekuasaan dan pengetahuan saling memproduksi. Setiap bentuk pengetahuan menetapkan "kebenaran" yang mengatur perilaku, dan setiap praktik kekuasaan memproduksi pengetahuan baru.</p>
-                    `,
-                    disiplin: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Panoptikon & Pengawasan Modern</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Foucault menggunakan arsitektur Panoptikon penjara untuk menggambarkan masyarakat modern di mana pengawasan yang konstan membuat individu mendisiplinkan dirinya sendiri.</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 9</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 9: Analisis Disiplin Institusional</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Kaji bentuk-bentuk pendisiplinan tubuh dan pikiran di lingkungan kampus atau sekolah menggunakan perspektif Panoptisme Foucault.</p>
-                            <button onclick="triggerQuiz(9)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 9</button>
-                        </div>
-                    `
-                }
-            },
-            10: {
-                title: "10. Kolonial: Edward Said",
-                subtitle: "Orientalisme dan Kritik Wacana Kolonial",
-                tabs: [
-                    { id: 'biografi', title: 'Biografi Said', icon: 'fa-user-tie' },
-                    { id: 'orientalisme', title: 'Konsep Orientalisme', icon: 'fa-globe' },
-                    { id: 'representasi', title: 'Representasi & Hegemoni', icon: 'fa-newspaper' },
-                    { id: 'latihan', title: 'Latihan Mandiri', icon: 'fa-pen-to-square' }
-                ],
-                content: {
-                    biografi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Edward Said (1935-2003)</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">Pemikir Palestina-Amerika pendiri studi postkolonial. Karyanya membongkar bagaimana dunia Barat mengkonstruksi citra dunia Timur sebagai "The Other" (Yang Liyan).</p>
-                    `,
-                    orientalisme: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Orientalisme sebagai Wacana Kekuasaan</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Orientalisme adalah cara pandang dominan Barat yang mengonstruksi Timur sebagai pihak yang eksotis, irasional, terbelakang, dan membutuhkan "bimbingan" kolonial.</p>
-                    `,
-                    representasi: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Dampak dan Dekolonialisasi</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-3">Kritik Said membuka jalan bagi gerakan dekolonisasi pengetahuan, menuntut representasi yang adil dan otonom bagi masyarakat pascakolonial.</p>
-                    `,
-                    latihan: `
-                        <h4 class="text-lg font-cinzel font-bold text-white mb-3">Tugas & Evaluasi Materi 10</h4>
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-sm space-y-3">
-                            <p class="font-medium text-brand-400">Tugas 10: Analisis Media & Stereotip</p>
-                            <p class="text-slate-300 text-xs leading-relaxed">Evaluasi pemberitaan atau film barat/lokal dalam merepresentasikan kelompok minoritas atau budaya tertentu menggunakan kacamata Orientalisme Edward Said.</p>
-                            <button onclick="triggerQuiz(10)" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs transition">Mulai Kuis Singkat Materi 10</button>
-                        </div>
-                    `
-                }
-            }
-        };
-
-        function renderMaterialView(container, materialIndex) {
-            const data = materialContentDB[materialIndex];
-            if (!data) return;
-
-            // Initialize active tab for this material if not set
-            if (!materialTabs[materialIndex]) {
-                materialTabs[materialIndex] = data.tabs[0].id;
-            }
-            const activeTabId = materialTabs[materialIndex];
-
-            container.innerHTML = `
-                <div class="max-w-5xl mx-auto space-y-6 animate-fade-in pb-16">
-                    <!-- Material Header -->
-                    <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-700/60 relative overflow-hidden bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-brand-950/30 shadow-xl">
-                        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-semibold tracking-wider uppercase border border-brand-500/30">Materi Kuliah ${materialIndex} dari 10</span>
-                                <h2 class="text-2xl sm:text-3xl font-cinzel font-bold text-white mt-2">${data.title}</h2>
-                                <p class="text-slate-400 text-sm mt-1">${data.subtitle}</p>
-                            </div>
-                            <div class="flex items-center space-x-3 shrink-0">
-                                <button onclick="toggleBookmark('materi-${materialIndex}')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-sm font-medium transition flex items-center space-x-2">
-                                    <i class="fa-solid fa-bookmark ${isBookmarked(`materi-${materialIndex}`) ? 'text-brand-400' : ''}"></i>
-                                    <span>${isBookmarked(`materi-${materialIndex}`) ? 'Tersimpan' : 'Simpan Materi'}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Material Navigation Tabs -->
-                    <div class="flex overflow-x-auto pb-2 gap-2 scrollbar-none">
-                        ${data.tabs.map(tab => `
-                            <button onclick="switchMaterialTab(${materialIndex}, '${tab.id}')" class="px-4 py-2.5 rounded-xl text-sm font-medium transition shrink-0 flex items-center space-x-2 ${activeTabId === tab.id ? 'bg-brand-500 text-slate-950 font-semibold shadow-lg shadow-brand-500/20' : 'glass-panel text-slate-300 hover:bg-slate-800/80'}">
-                                <i class="fa-solid ${tab.icon}"></i>
-                                <span>${tab.title}</span>
-                            </button>
-                        `).join('')}
-                    </div>
-
-                    <!-- Material Tab Content -->
-                    <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800/80 shadow-2xl">
-                        <div class="animate-fade-in">
-                            ${data.content[activeTabId]}
-                        </div>
-                    </div>
-
-                    <!-- Pagination Footer -->
-                    <div class="flex items-center justify-between pt-4">
-                        ${materialIndex > 1 ? `<button onclick="navigateTo('materi-${materialIndex - 1}')" class="px-4 py-2.5 rounded-xl glass-panel hover:bg-slate-800 text-slate-300 text-sm font-medium transition flex items-center space-x-2"><i class="fa-solid fa-arrow-left"></i><span>Materi Sebelumnya</span></button>` : '<div></div>'}
-                        ${materialIndex < 10 ? `<button onclick="navigateTo('materi-${materialIndex + 1}')" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium transition flex items-center space-x-2 shadow-lg shadow-brand-600/20"><span>Materi Selanjutnya</span><i class="fa-solid fa-arrow-right"></i></button>` : '<div></div>'}
-                    </div>
-                </div>
-            `;
-        }
-
-        function switchMaterialTab(materialIndex, tabId) {
-            materialTabs[materialIndex] = tabId;
-            renderMaterialView(document.getElementById('main-viewport'), materialIndex);
-        }
-
-        function toggleBookmark(id) {
-            if (bookmarks.includes(id)) {
-                bookmarks = bookmarks.filter(b => b !== id);
-            } else {
-                bookmarks.push(id);
-            }
-            localStorage.setItem('sosiologi_bookmarks', JSON.stringify(bookmarks));
-            updateBookmarkBadge();
-            // Re-render current view to update bookmark button state
-            navigateTo(currentActiveId);
-        }
-
-        function isBookmarked(id) {
-            return bookmarks.includes(id);
-        }
-
-        function updateBookmarkBadge() {
-            const badge = document.getElementById('bookmark-count');
-            if (bookmarks.length > 0) {
-                badge.innerText = bookmarks.length;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        }
-
-        function openBookmarksModal() {
-            const modal = document.getElementById('search-modal');
-            const input = document.getElementById('search-input');
-            const results = document.getElementById('search-results');
-            
-            input.value = '';
-            modal.classList.remove('hidden');
-            
-            if (bookmarks.length === 0) {
-                results.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">Belum ada materi yang disimpan ke bookmark.</div>`;
-                return;
-            }
-
-            results.innerHTML = `
-                <div class="text-xs font-bold text-brand-400 uppercase tracking-wider px-3 py-1">Materi Tersimpan (${bookmarks.length})</div>
-                ${bookmarks.map(id => {
-                    const item = courseData.navItems.find(i => i.id === id) || { title: 'Rencana Pembelajaran Semester', id: 'rps' };
-                    return `
-                        <div onclick="navigateTo('${item.id}'); closeSearchModal();" class="p-3 rounded-xl bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 cursor-pointer transition flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <i class="fa-solid fa-bookmark text-brand-400"></i>
-                                <span class="text-sm font-medium text-slate-200">${item.title}</span>
-                            </div>
-                            <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
-                        </div>
-                    `;
-                }).join('')}
-            `;
-        }
-
-        function triggerSearchModal() {
-            document.getElementById('search-modal').classList.remove('hidden');
-            document.getElementById('search-input').focus();
-        }
-
-        function closeSearchModal() {
-            document.getElementById('search-modal').classList.add('hidden');
-        }
-
-        function handleSearch(query) {
-            const resultsContainer = document.getElementById('search-results');
-            if (!query.trim()) {
-                resultsContainer.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">Ketik kata kunci untuk mencari di seluruh materi kuliah sosiologi...</div>`;
-                return;
-            }
-
-            const q = query.toLowerCase();
-            const matches = [];
-
-            courseData.navItems.forEach(item => {
-                if (item.title.toLowerCase().includes(q) || (item.subtitle && item.subtitle.toLowerCase().includes(q))) {
-                    matches.push(item);
-                }
-            });
-
-            if (matches.length === 0) {
-                resultsContainer.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">Tidak ditemukan materi dengan kata kunci "${query}"</div>`;
-                return;
-            }
-
-            resultsContainer.innerHTML = `
-                <div class="text-xs font-bold text-brand-400 uppercase tracking-wider px-3 py-1">Hasil Pencarian (${matches.length})</div>
-                ${matches.map(item => `
-                    <div onclick="navigateTo('${item.id}'); closeSearchModal();" class="p-3 rounded-xl bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 cursor-pointer transition flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-slate-200">${item.title}</p>
-                            ${item.subtitle ? `<p class="text-xs text-slate-400">${item.subtitle}</p>` : ''}
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-500"></i>
-                    </div>
-                `).join('')}
-            `;
-        }
-
-        const quizData = {
-            1: { q: "Siapa tokoh yang mencetuskan istilah Sosiologi pertama kali pada tahun 1842?", opts: ["Karl Marx", "Auguste Comte", "Emile Durkheim", "Max Weber"], ans: 1 },
-            2: { q: "Solidaritas yang didasarkan pada kesamaan kolektif dalam masyarakat tradisional disebut...", opts: ["Solidaritas Organik", "Solidaritas Mekanik", "Solidaritas Fungsional", "Solidaritas Modern"], ans: 1 },
-            3: { q: "Dalam teori Karl Marx, kaum pemilik modal dan alat produksi disebut sebagai...", opts: ["Proletar", "Borjuis", "Birokrat", "Subaltern"], ans: 1 },
-            4: { q: "Tindakan sosial yang dilakukan semata-mata karena kebiasaan turun-temurun disebut...", opts: ["Tujuan-Rasional", "Afektif", "Tradisional", "Nilai-Rasional"], ans: 2 },
-            5: { q: "Simmel menyebut kelompok sosial yang terdiri dari 2 orang sebagai...", opts: ["Dyad", "Triad", "Guild", "Clan"], ans: 0 },
-            6: { q: "Dalam skema AGIL Talcott Parsons, huruf 'A' merepresentasikan...", opts: ["Adaptation", "Action", "Authority", "Aggregation"], ans: 0 },
-            7: { q: "Zygmunt Bauman menggambarkan era saat ini dengan istilah...", opts: ["Solid Modernity", "Liquid Modernity", "Rigid Modernity", "Static Modernity"], ans: 1 },
-            8: { q: "Modal yang mencakup pengetahuan, keterampilan, dan gelar akademik menurut Bourdieu disebut...", opts: ["Modal Ekonomi", "Modal Sosial", "Modal Budaya", "Modal Simbolik"], ans: 2 },
-            9: { q: "Konsep arsitektur penjara yang digunakan Foucault untuk menggambarkan masyarakat pengawasan adalah...", opts: ["Panoptikon", "Babel", "Agora", "Utopia"], ans: 0 },
-            10: { q: "Kritik wacana kolonial yang mengonstruksi dunia Timur sebagai 'Yang Liyan' dicetuskan oleh...", opts: ["Edward Said", "Gayatri Spivak", "Michel Foucault", "Zygmunt Bauman"], ans: 0 }
-        };
-
-        function triggerQuiz(materialIndex) {
-            const quiz = quizData[materialIndex];
-            if (!quiz) return;
-
-            const modal = document.getElementById('quiz-modal');
-            const content = document.getElementById('quiz-content');
-
-            content.innerHTML = `
-                <div class="space-y-5 animate-fade-in">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <span class="text-xs font-bold text-brand-400 uppercase tracking-widest">Uji Pemahaman - Materi ${materialIndex}</span>
-                        <span class="text-xs text-slate-400">Pilihan Ganda</span>
-                    </div>
-                    <p class="text-base font-semibold text-white">${quiz.q}</p>
-                    <div class="space-y-2.5">
-                        ${quiz.opts.map((opt, i) => `
-                            <button onclick="checkQuizAnswer(${materialIndex}, ${i}, ${quiz.ans})" class="w-full text-left p-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-sm text-slate-200 transition quiz-opt-${i}">
-                                ${opt}
-                            </button>
-                        `).join('')}
-                    </div>
-                    <div id="quiz-feedback" class="text-sm font-medium pt-2"></div>
-                </div>
-            `;
-            modal.classList.remove('hidden');
-        }
-
-        function checkQuizAnswer(materialIndex, selected, correct) {
-            const feedback = document.getElementById('quiz-feedback');
-            const buttons = document.querySelectorAll('#quiz-content button');
-
-            buttons.forEach((btn, idx) => {
-                btn.disabled = true;
-                if (idx === correct) {
-                    btn.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
-                } else if (idx === selected && selected !== correct) {
-                    btn.classList.add('bg-rose-500/20', 'border-rose-500', 'text-rose-300');
-                }
-            });
-
-            if (selected === correct) {
-                feedback.innerHTML = `<p class="text-emerald-400"><i class="fa-solid fa-circle-check mr-2"></i>Jawaban Anda Benar! Pemahaman materi sangat baik.</p>`;
-            } else {
-                feedback.innerHTML = `<p class="text-rose-400"><i class="fa-solid fa-circle-xmark mr-2"></i>Jawaban Kurang Tepat. Silakan tinjau kembali ringkasan materi.</p>`;
-            }
-        }
-
-        function openQuizModal() {
-            triggerQuiz(1);
-        }
-
-        function closeQuizModal() {
-            document.getElementById('quiz-modal').classList.add('hidden');
-        }
+        lucide.createIcons();
     </script>
 </body>
 </html>
